@@ -122,48 +122,124 @@ function Hero() {
           </motion.div>
         </motion.div>
 
+        {/* 3D Product Mockup with Glassmorphism */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="mt-16 relative"
+          className="mt-16 relative perspective-container"
         >
-          <div className="bg-gradient-to-b from-indigo-100 to-white rounded-2xl p-8 shadow-2xl border border-gray-100">
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-3 h-3 rounded-full bg-red-400" />
-                <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                <div className="w-3 h-3 rounded-full bg-green-400" />
-              </div>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
+          {/* Background Glow Effects */}
+          <div className="absolute inset-0 -z-10">
+            <div className="absolute top-1/2 left-1/4 w-72 h-72 bg-indigo-400/30 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-purple-400/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute bottom-1/4 left-1/3 w-56 h-56 bg-emerald-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+          </div>
+
+          {/* Main 3D Mockup */}
+          <motion.div
+            whileHover={{ rotateY: -5, rotateX: 2, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="mockup-3d mockup-shadow rounded-2xl overflow-hidden"
+          >
+            <div className="glass-card p-1">
+              <div className="bg-gradient-to-br from-white/90 to-white/70 dark:from-gray-900/90 dark:to-gray-800/70 rounded-xl p-6 backdrop-blur-xl">
+                {/* Browser Chrome */}
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-3 h-3 rounded-full bg-red-400" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                  <div className="w-3 h-3 rounded-full bg-green-400" />
+                  <div className="flex-1 mx-4">
+                    <div className="bg-gray-100 dark:bg-gray-800 rounded-full px-4 py-1 text-xs text-gray-500 text-center">
+                      mysatprepai.com/dashboard
+                    </div>
+                  </div>
+                </div>
+
+                {/* Score Dashboard */}
+                <div className="space-y-6">
+                  <div className="flex justify-between items-start">
+                    <div className="glass-card rounded-xl p-4 flex-1 mr-4">
+                      <p className="text-sm text-gray-500 mb-1">Predicted Score</p>
+                      <div className="flex items-baseline gap-2">
+                        <motion.span
+                          className="text-5xl font-bold gradient-text"
+                          initial={{ scale: 0.5, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ delay: 0.6, type: "spring" }}
+                        >
+                          1420
+                        </motion.span>
+                        <span className="flex items-center gap-1 text-green-600 font-medium">
+                          <TrendingUp className="w-4 h-4" />
+                          +60
+                        </span>
+                      </div>
+                    </div>
+                    <div className="glass-card rounded-xl p-4">
+                      <p className="text-sm text-gray-500 mb-1">Target</p>
+                      <p className="text-3xl font-bold text-gray-400">1500</p>
+                    </div>
+                  </div>
+
+                  {/* Progress Bar */}
                   <div>
-                    <p className="text-sm text-gray-500">Predicted Score</p>
-                    <p className="text-4xl font-bold text-indigo-600">1420</p>
-                    <p className="text-sm text-green-600">+60 from start</p>
+                    <div className="flex justify-between text-sm mb-2">
+                      <span className="text-gray-600 font-medium">Progress to Target</span>
+                      <span className="text-indigo-600 font-bold">71%</span>
+                    </div>
+                    <div className="h-4 rounded-full bg-gray-100 overflow-hidden">
+                      <motion.div
+                        className="h-full gradient-bg rounded-full"
+                        initial={{ width: 0 }}
+                        animate={{ width: '71%' }}
+                        transition={{ duration: 1.5, delay: 0.8, ease: "easeOut" }}
+                      />
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="text-sm text-gray-500">Target Score</p>
-                    <p className="text-4xl font-bold text-gray-300">1500</p>
-                    <p className="text-sm text-gray-500">71% progress</p>
+
+                  {/* Section Scores */}
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="glass-card rounded-lg p-3 text-center">
+                      <div className="text-xs text-gray-500 mb-1">Reading</div>
+                      <div className="text-xl font-bold text-blue-600">710</div>
+                    </div>
+                    <div className="glass-card rounded-lg p-3 text-center">
+                      <div className="text-xs text-gray-500 mb-1">Writing</div>
+                      <div className="text-xl font-bold text-purple-600">690</div>
+                    </div>
+                    <div className="glass-card rounded-lg p-3 text-center">
+                      <div className="text-xs text-gray-500 mb-1">Math</div>
+                      <div className="text-xl font-bold text-green-600">720</div>
+                    </div>
                   </div>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-3">
-                  <div className="gradient-bg h-3 rounded-full" style={{ width: '71%' }}></div>
-                </div>
-                <div className="border-t pt-4">
-                  <p className="text-sm font-medium text-gray-500 mb-2">Focus Areas Today</p>
-                  <div className="flex gap-2">
-                    <span className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm">Algebra: Quadratics</span>
-                    <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">Reading: Inference</span>
+
+                  {/* Today's Focus */}
+                  <div className="flex gap-2 flex-wrap">
+                    <span className="bg-indigo-100/70 text-indigo-700 px-3 py-1.5 rounded-full text-sm font-medium backdrop-blur-sm">
+                      Algebra: Quadratics
+                    </span>
+                    <span className="bg-purple-100/70 text-purple-700 px-3 py-1.5 rounded-full text-sm font-medium backdrop-blur-sm">
+                      Reading: Inference
+                    </span>
+                    <span className="bg-green-100/70 text-green-700 px-3 py-1.5 rounded-full text-sm font-medium backdrop-blur-sm">
+                      Grammar Rules
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="absolute -right-4 top-20 bg-white rounded-xl shadow-lg p-4 animate-float hidden lg:block">
+          </motion.div>
+
+          {/* Floating Glassmorphism Cards */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8 }}
+            className="absolute -right-4 lg:-right-8 top-20 glass-card rounded-xl p-4 animate-float-3d hidden lg:block glow-primary"
+          >
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 gradient-bg rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 gradient-bg rounded-full flex items-center justify-center shadow-lg">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
               <div>
@@ -171,7 +247,42 @@ function Hero() {
                 <p className="text-xs text-gray-500">Score prediction</p>
               </div>
             </div>
-          </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1 }}
+            className="absolute -left-4 lg:-left-8 top-40 glass-card rounded-xl p-4 animate-float hidden lg:block"
+            style={{ animationDelay: '0.5s' }}
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                <TrendingUp className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p className="font-semibold text-sm">+180 pts</p>
+                <p className="text-xs text-gray-500">Avg. improvement</p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2 }}
+            className="absolute right-20 -bottom-4 glass-card rounded-xl p-3 animate-float hidden lg:block"
+            style={{ animationDelay: '1s' }}
+          >
+            <div className="flex items-center gap-2">
+              <div className="flex -space-x-2">
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 border-2 border-white" />
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 border-2 border-white" />
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-green-400 to-teal-500 border-2 border-white" />
+              </div>
+              <span className="text-xs text-gray-600">50,000+ students</span>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
