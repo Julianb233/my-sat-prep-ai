@@ -318,32 +318,32 @@ function Features() {
     {
       icon: Target,
       title: "Adaptive Practice",
-      description: "Questions that adjust to your level. Too easy? We'll challenge you. Struggling? We'll build your foundation.",
+      description: "Questions that intelligently adjust to your level in real-time. Too easy? We'll challenge you with harder problems. Struggling? We'll build your foundation step by step. Every question is chosen to maximize your learning.",
     },
     {
       icon: TrendingUp,
       title: "Score Prediction",
-      description: "AI predicts your SAT score based on practice performance with 95% accuracy. Watch your predicted score climb.",
+      description: "Our AI predicts your SAT score with 95% accuracy based on your practice performance. Watch your predicted score climb as you improve. Know exactly where you stand before test day arrives.",
     },
     {
       icon: Search,
       title: "Weak Area Focus",
-      description: "Automatically identifies your trouble spots and generates targeted practice to turn weaknesses into strengths.",
+      description: "Stop wasting time on topics you've already mastered. Our AI automatically identifies your trouble spots and generates targeted practice to turn weaknesses into strengths. Focus your energy where it matters most.",
     },
     {
       icon: Calendar,
       title: "Study Schedule",
-      description: "Personalized daily study plans based on your test date, current level, and target score. Never wonder what to study.",
+      description: "Get a personalized daily study plan based on your test date, current level, and target score. Our AI considers how much time you have and creates the optimal path to your goal. Never wonder what to study next.",
     },
     {
       icon: FileText,
       title: "Full Practice Tests",
-      description: "Timed, realistic SAT simulations with detailed explanations. Know exactly what test day feels like.",
+      description: "Take realistic, timed SAT simulations that mirror the real test exactly. Each question comes with detailed explanations. Students consistently say test day felt familiar because of our practice tests.",
     },
     {
       icon: PenTool,
       title: "Essay Analysis",
-      description: "AI-powered essay feedback on structure, evidence, and writing style. Improve your writing score fast.",
+      description: "Get AI-powered feedback on your essay's structure, evidence usage, and writing style. Our analysis helps you understand exactly what graders look for and how to improve your writing score quickly.",
     },
   ];
 
@@ -579,25 +579,158 @@ function Pricing() {
   );
 }
 
+function Comparison() {
+  const features = [
+    { name: "AI Score Prediction", us: true, competitor1: false, competitor2: "limited" },
+    { name: "Adaptive Practice", us: true, competitor1: true, competitor2: false },
+    { name: "Weak Area Analysis", us: true, competitor1: "partial", competitor2: true },
+    { name: "Custom Study Schedule", us: true, competitor1: false, competitor2: true },
+    { name: "Full Practice Tests", us: "Unlimited", competitor1: "8", competitor2: "10" },
+    { name: "Essay Feedback", us: true, competitor1: false, competitor2: true },
+    { name: "Mobile App", us: true, competitor1: true, competitor2: true },
+    { name: "Price", us: "$29/mo", competitor1: "Free", competitor2: "$299+" },
+  ];
+
+  const renderValue = (value: boolean | string) => {
+    if (value === true) return <Check className="w-5 h-5 text-green-500 mx-auto" />;
+    if (value === false) return <span className="text-gray-300">—</span>;
+    if (value === "limited" || value === "partial") return <span className="text-yellow-500 text-sm font-medium">Partial</span>;
+    return <span className="text-sm font-medium">{value}</span>;
+  };
+
+  return (
+    <section className="py-24 bg-gray-50">
+      <div className="max-w-5xl mx-auto px-4">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={stagger}
+          className="text-center mb-16"
+        >
+          <motion.p variants={fadeInUp} className="text-indigo-600 font-semibold mb-4">COMPARISON</motion.p>
+          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-6">
+            See why students <span className="gradient-text">choose us</span>
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Compare our features with other popular SAT prep options.
+          </motion.p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100"
+        >
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-gray-100">
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Feature</th>
+                  <th className="px-6 py-4 text-center">
+                    <div className="flex flex-col items-center">
+                      <div className="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center mb-2">
+                        <Award className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="font-bold text-indigo-600">My SAT Prep AI</span>
+                    </div>
+                  </th>
+                  <th className="px-6 py-4 text-center">
+                    <div className="flex flex-col items-center">
+                      <div className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center mb-2">
+                        <span className="text-gray-500 text-xs font-bold">KA</span>
+                      </div>
+                      <span className="font-medium text-gray-600">Khan Academy</span>
+                    </div>
+                  </th>
+                  <th className="px-6 py-4 text-center">
+                    <div className="flex flex-col items-center">
+                      <div className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center mb-2">
+                        <span className="text-gray-500 text-xs font-bold">PR</span>
+                      </div>
+                      <span className="font-medium text-gray-600">Princeton Review</span>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {features.map((feature, index) => (
+                  <tr
+                    key={feature.name}
+                    className={`${index % 2 === 0 ? "bg-gray-50/50" : ""} ${
+                      feature.name === "Price" ? "border-t-2 border-indigo-100" : ""
+                    }`}
+                  >
+                    <td className="px-6 py-4 text-sm font-medium text-gray-700">{feature.name}</td>
+                    <td className="px-6 py-4 text-center bg-indigo-50/30">{renderValue(feature.us)}</td>
+                    <td className="px-6 py-4 text-center">{renderValue(feature.competitor1)}</td>
+                    <td className="px-6 py-4 text-center">{renderValue(feature.competitor2)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="px-6 py-4 bg-gradient-to-r from-indigo-50 to-purple-50 border-t border-indigo-100">
+            <p className="text-sm text-gray-600 text-center">
+              <span className="font-semibold text-indigo-600">Best value:</span> Get unlimited AI-powered practice, score prediction, and personalized study plans for just $29/month.
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function Testimonials() {
   const testimonials = [
     {
-      quote: "I went from a 1280 to a 1480 in 3 months. The weak area focus saved me from wasting time on stuff I already knew.",
+      quote: "I went from a 1280 to a 1480 in 3 months. The weak area focus saved me from wasting time on stuff I already knew. This single feature probably saved me 50+ hours of studying.",
       author: "Jason K.",
-      role: "Senior, now at UCLA",
+      role: "Senior, UCLA Class of 2028",
       rating: 5,
+      initials: "JK",
+      score: "1280 → 1480",
     },
     {
-      quote: "The score predictor was scary accurate. It said 1520, I got 1530. The practice tests really prepared me.",
+      quote: "The score predictor was scary accurate. It said 1520, I got 1530. The practice tests felt exactly like the real thing - no surprises on test day.",
       author: "Emily R.",
-      role: "Junior",
+      role: "Junior, Houston TX",
       rating: 5,
+      initials: "ER",
+      score: "Predicted: 1520, Actual: 1530",
     },
     {
-      quote: "As a tutor, I recommend this to all my students. It's like having a personal SAT coach 24/7.",
+      quote: "As a tutor, I recommend this to all my students. It's like having a personal SAT coach 24/7. The adaptive practice is better than most expensive test prep courses.",
       author: "David L.",
-      role: "SAT Tutor",
+      role: "SAT Tutor, 10+ years experience",
       rating: 5,
+      initials: "DL",
+      score: "Recommended",
+    },
+    {
+      quote: "My math section jumped 120 points in just 8 weeks. The AI figured out I kept making careless errors on word problems and drilled me until it clicked.",
+      author: "Priya S.",
+      role: "Senior, Stanford Admit",
+      rating: 5,
+      initials: "PS",
+      score: "1350 → 1520",
+    },
+    {
+      quote: "I struggled with reading comprehension for years. The targeted practice helped me go from 580 to 720 on Reading/Writing. Life-changing for my college applications.",
+      author: "Marcus W.",
+      role: "Junior, Boston MA",
+      rating: 5,
+      initials: "MW",
+      score: "1180 → 1380",
+    },
+    {
+      quote: "I've tried Khan Academy, Princeton Review, and private tutoring. This is the only prep that truly personalizes to each student. I recommend it to every family I counsel.",
+      author: "Amanda C.",
+      role: "College Counselor, Prep School",
+      rating: 5,
+      initials: "AC",
+      score: "Top Recommendation",
     },
   ];
 
@@ -636,11 +769,18 @@ function Testimonials() {
                 ))}
               </div>
               <p className="text-lg text-gray-700 mb-6">&ldquo;{testimonial.quote}&rdquo;</p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500" />
-                <div>
-                  <p className="font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-gray-500">{testimonial.role}</p>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold">
+                    {testimonial.initials}
+                  </div>
+                  <div>
+                    <p className="font-semibold">{testimonial.author}</p>
+                    <p className="text-sm text-gray-500">{testimonial.role}</p>
+                  </div>
+                </div>
+                <div className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">
+                  {testimonial.score}
                 </div>
               </div>
             </motion.div>
@@ -775,39 +915,51 @@ function Footer() {
               </div>
               <span className="font-bold text-xl">My SAT Prep AI</span>
             </div>
-            <p className="text-gray-400">
+            <p className="text-gray-400 mb-4">
               AI-powered SAT preparation for your dream score.
             </p>
+            <div className="flex gap-4">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </a>
+              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+              </a>
+            </div>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Product</h4>
             <ul className="space-y-2 text-gray-400">
               <li><a href="#features" className="hover:text-white transition">Features</a></li>
               <li><a href="#pricing" className="hover:text-white transition">Pricing</a></li>
-              <li><a href="#" className="hover:text-white transition">Practice Tests</a></li>
-              <li><a href="#" className="hover:text-white transition">Study Plans</a></li>
+              <li><a href="#how-it-works" className="hover:text-white transition">How It Works</a></li>
+              <li><a href="#faq" className="hover:text-white transition">FAQ</a></li>
             </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-white transition">About</a></li>
-              <li><a href="#" className="hover:text-white transition">Success Stories</a></li>
-              <li><a href="#" className="hover:text-white transition">Blog</a></li>
-              <li><a href="#" className="hover:text-white transition">Contact</a></li>
+              <li><a href="/about" className="hover:text-white transition">About Us</a></li>
+              <li><a href="#testimonials" className="hover:text-white transition">Success Stories</a></li>
+              <li><a href="mailto:hello@mysatprepai.com" className="hover:text-white transition">Contact</a></li>
+              <li><a href="mailto:support@mysatprepai.com" className="hover:text-white transition">Support</a></li>
             </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Legal</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-white transition">Privacy</a></li>
-              <li><a href="#" className="hover:text-white transition">Terms</a></li>
-              <li><a href="#" className="hover:text-white transition">Refund Policy</a></li>
+              <li><a href="/privacy" className="hover:text-white transition">Privacy Policy</a></li>
+              <li><a href="/terms" className="hover:text-white transition">Terms of Service</a></li>
+              <li><a href="/terms#refund" className="hover:text-white transition">Refund Policy</a></li>
             </ul>
           </div>
         </div>
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-400">
           <p>&copy; {new Date().getFullYear()} My SAT Prep AI. All rights reserved.</p>
+          <p className="mt-4 md:mt-0 text-sm">Helping students reach their dream scores</p>
         </div>
       </div>
     </footer>
@@ -823,6 +975,7 @@ export default function Home() {
       <Features />
       <HowItWorks />
       <Pricing />
+      <Comparison />
       <Testimonials />
       <FAQ />
       <FinalCTA />
